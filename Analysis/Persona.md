@@ -10,7 +10,7 @@
 <h2>NGO</h2>
 <p>Name       : Dewi</p>
 <p>Age        : 28</p>
-<p>Job        : Owner of a NGO</p>
+<p>Job        : NGO Organizer</p>
 <p>Gender     : Female</p>
 <p>Behavior   : very conscious of nature</p>
 <p>Likes      : Watching documentary, Gardening, Organizing ledgers</p>
