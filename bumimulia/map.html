@@ -1,27 +1,125 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Indonesia Map</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      display: flex;
+      height: 100vh;
+      overflow: hidden;
+    }
+    #map {
+      flex: 1;
+    }
+    #sidebar {
+      width: 300px;
+      background-color: #f4f4f4;
+      box-shadow: 2px 0 5px rgba(0,0,0,0.2);
+      display: none;
+      flex-shrink: 0;
+      padding: 20px;
+      overflow-y: auto;
+    }
+    #sidebar.open {
+      display: block;
+    }
+    #sidebar h2 {
+      margin: 0 0 10px;
+    }
+    #sidebar p {
+      line-height: 1.6;
+    }
+    .close-btn {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 5px 10px;
+      background: #e74c3c;
+      color: white;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
-    <title> map </title>
-    <div class = "homescreen">
-        <h1> Bumi Mulia </h1>
-        <img> <!--put Bumi Mulia logo here--> </img>
-    </div>
-    <div class = "normalnavpage">
-        <nav>
-            <a href = "normalpage.html">Home</a>
-            <a href = "events.html">Events</a>
-            <a href = "map.html">Map</a>
-            <a href = "contactus.html">Contact Us</a>
-        </nav>
-    </div>
+  <div id="map"></div>
+  <div id="sidebar">
+    <button class="close-btn" onclick="closeSidebar()">Close</button>
+    <h2 id="region-name">Region Name</h2>
+    <p id="region-info">Region information will appear here.</p>
+  </div>
 
-    <h1>Map</h1>
+  <script>
+    // Make map centred in Indonesia
+    const map = L.map('map', {
+      minZoom: 5,
+      maxZoom: 18,
+    }).setView([-2.5489, 118.0149], 5);
 
+    // Map
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
 
+    // Set limits to scrolling 
+    const indonesiaBounds = [
+      [-11.0, 94.0], // Southwest corner
+      [6.0, 141.0]   // Northeast corner
+    ];
+    map.setMaxBounds(indonesiaBounds);
+    map.on('drag', function () {
+      map.panInsideBounds(indonesiaBounds, { animate: true });
+    });
+
+    // Sidebar
+    const sidebar = document.getElementById('sidebar');
+    const regionName = document.getElementById('region-name');
+    const regionInfo = document.getElementById('region-info');
+
+    // Open Sidebar
+    function openSidebar(name, info) {
+      regionName.textContent = name;
+      regionInfo.textContent = info;
+      sidebar.classList.add('open');
+    }
+
+    // Close sidebar
+    function closeSidebar() {
+      sidebar.classList.remove('open');
+    }
+
+    // Data to Sidebar
+    const regions = [
+      {
+        name: "Java",
+        coords: [-7.6145, 110.7122],
+        info: "Java is the world's most populous island and the center of Indonesia's economy and culture."
+      },
+      {
+        name: "Sumatra",
+        coords: [0.7893, 101.6118],
+        info: "Sumatra is known for its rich biodiversity and vibrant culture."
+      },
+      {
+        name: "Bali",
+        coords: [-8.3405, 115.092],
+        info: "Bali is a world-famous tourist destination with stunning beaches and unique culture."
+      }
+    ];
+
+    // Markers
+    regions.forEach(region => {
+      const marker = L.marker(region.coords).addTo(map);
+      marker.on('click', () => {
+        openSidebar(region.name, region.info);
+      });
+    });
+  </script>
 </body>
 </html>
