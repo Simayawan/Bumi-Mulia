@@ -1,0 +1,94 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f4f4f4;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 1rem 0;
+}
+
+header h1 {
+    display: inline-block;
+    font-size: 2rem;
+}
+
+header nav {
+    float: right;
+}
+
+header nav ul {
+    list-style: none;
+}
+
+header nav ul li {
+    display: inline;
+    margin-left: 15px;
+}
+
+header nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.otp-container {
+    background-color: #fff;
+    border: 1px solid #dcdcdc;
+    border-radius: 5px;
+    width: 30%;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    margin-top: 20px;
+    margin-left: 500px;
+}
+
+.otp-container p {
+    margin-bottom: 15px;
+    color: #555;
+    font-size: 14px;
+}
+
+
+.otp-input {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+
+
+.cancel-btn {
+    background-color: #cf1010; 
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 3px;
+    font-size: 14px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.cancel-btn:hover {
+    background-color: #5f0e0e; 
+}
